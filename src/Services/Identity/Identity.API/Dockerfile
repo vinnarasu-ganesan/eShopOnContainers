@@ -1,8 +1,8 @@
-FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:3.60 AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:3.60 AS build
 WORKDIR /src
 
 # It's important to keep lines from here down to "COPY . ." identical in all Dockerfiles
@@ -43,7 +43,7 @@ COPY "docker-compose.dcproj" "docker-compose.dcproj"
 
 COPY "NuGet.config" "NuGet.config"
 
-RUN dotnet restore "eShopOnContainers-ServicesAndWebApps.sln" --disable-parallel
+RUN dotnet restore "eShopOnContainers-ServicesAndWebApps.sln"
 
 COPY . .
 WORKDIR /src/Services/Identity/Identity.API
